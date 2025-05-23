@@ -1,8 +1,19 @@
-
 package practica.modelo;
 
-public class Usuario {
- 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.List;
+
+@Entity
+@Table(name = "usuarios")
+public class Usuarios {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //estratregi para hacer las tablas
     private Integer id;
     private String nombre;
     private String username;
@@ -12,13 +23,20 @@ public class Usuario {
     private String tipo;
     private String password;
 
-    public Usuario() {
+    //lista de productos
+    @OneToMany(mappedBy = "usuario") //relacion de uno a muchos: un usuarios puede tener muchos productos y se mappea con usuario
+    private List<Producto> productos;
+
+    //lista de ordenens para un usuarios
+    @OneToMany(mappedBy = "usuario") //relacion de uno a muchos: un usurios puede tener muchas ordenes y se mapea con usuarios
+    private List<Orden> ordenes;
+    
+    
+    public Usuarios() {
     }
 
-    
-    
-    public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono, String tipo, String password) {
-       super();
+    public Usuarios(Integer id, String nombre, String username, String email, String direccion, String telefono, String tipo, String password) {
+        super();
         this.id = id;
         this.nombre = nombre;
         this.username = username;
@@ -28,8 +46,6 @@ public class Usuario {
         this.tipo = tipo;
         this.password = password;
     }
-    
-    
 
     public Integer getId() {
         return id;
@@ -94,7 +110,13 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
 }

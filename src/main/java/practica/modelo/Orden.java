@@ -1,15 +1,34 @@
 package practica.modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name="ordenes")
 public class Orden {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
     private double total;
 
+    //relacion de mucho a uno: muchos usuarios pueden tener una orden
+    @ManyToOne
+    private Usuarios usuario;
+    
+    //relacion de uno a uno con detalle: un orden puede tener un detalle de orden
+    @OneToOne(mappedBy = "orden")
+    private DetalleOrden detalle;
+    
     public Orden() {
     }
 
@@ -62,6 +81,22 @@ public class Orden {
         this.total = total;
     }
 
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public DetalleOrden getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(DetalleOrden detalle) {
+        this.detalle = detalle;
+    }
+    
     @Override
     public String toString() {
         return "Orden del pedido"
