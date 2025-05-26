@@ -1,6 +1,7 @@
 package practica.servicio;
 //para los metodos
 
+import java.util.List;
 import java.util.Optional;
 import practica.modelo.Producto;
 
@@ -17,4 +18,7 @@ public interface ProductoServicio {
 
     //metodo para eliminar
     public void delete(Integer id);
+    
+    //metodo para mostrar los productos
+    public List<Producto> findAll();
 }

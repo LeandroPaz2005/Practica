@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="ordenes")
@@ -27,7 +28,7 @@ public class Orden {
     
     //relacion de uno a uno con detalle: un orden puede tener un detalle de orden
     @OneToOne(mappedBy = "orden")
-    private DetalleOrden detalle;
+    private DetalleOrden orden;
     
     public Orden() {
     }
@@ -89,13 +90,14 @@ public class Orden {
         this.usuario = usuario;
     }
 
-    public DetalleOrden getDetalle() {
-        return detalle;
+    public DetalleOrden getOrden() {
+        return orden;
     }
 
-    public void setDetalle(DetalleOrden detalle) {
-        this.detalle = detalle;
+    public void setOrden(DetalleOrden orden) {
+        this.orden = orden;
     }
+
     
     @Override
     public String toString() {
