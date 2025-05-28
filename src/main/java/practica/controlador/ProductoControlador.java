@@ -56,10 +56,16 @@ public class ProductoControlador {
         return "productos/edit";
     }
     
-    
     @PostMapping("/update")
     public String update(Producto producto){
         productoServico.update(producto);
+    return "redirect:/productos";
+    }
+    
+    //metodo para eliminar
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id){
+        productoServico.delete(id);
     return "redirect:/productos";
     }
 
